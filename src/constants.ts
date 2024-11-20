@@ -1,7 +1,9 @@
+import { SortBy } from "./types";
+
 const TABLE_COLUMNS = ['title', 'publishedAt', 'description', 'action'];
 
 const NEWS_API = {
-  KEY: 'f610901c4e2f420091b164841d35a5f5',
+  KEY: '77fec77183c04172a234da70fc463ec5',
   URL: 'https://newsapi.org/v2',
   EVERYTHING_ENDPOINT: '/everything',
 };
@@ -14,10 +16,9 @@ const CHECKBOX_OPTIONS = [
 ];
 
 const SORT_OPTIONS = [
-  { label: 'Без сортировки', value: '' },
-  { label: 'По релевантности', value: 'relevancy' },
-  { label: 'По популярности', value: 'popularity' },
-  { label: 'По дате публикации', value: 'publishedAt' },
+  { label: 'Без сортировки', value: SortBy.WithoutSort },
+  { label: 'Самые новые', value: SortBy.Newest },
+  { label: 'Самые старые', value: SortBy.Oldest },
 ];
 
 export {

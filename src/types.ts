@@ -1,9 +1,8 @@
 export enum SortBy {
   WithoutSort = '',
-  Relevancy = 'relevancy',
-  Popularity = 'popularity',
-  PublishedAt = 'publishedAt',
-}
+  Newest = 'newest',
+  Oldest = 'oldest',
+};
 
 export interface INewsItem {
   key: number;
@@ -12,10 +11,8 @@ export interface INewsItem {
   publishedAt: string;
   description: string;
   content: string;
-}
+};
 
 export interface FetchNewsParams {
-  qInTitle?: string;
-  sortBy?: SortBy;
   sources?: string;
-}
+};

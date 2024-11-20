@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Layout } from 'antd';
 import NewsTable from '../../components/NewsTable';
 import { fetchNews } from '../../api/newsApi';
@@ -6,6 +6,7 @@ import { useNewsStore } from '../../store/useNewsStore';
 import Menu from '../../components/Menu';
 import ErrorMessage from '../../components/ErrorMessage';
 import styles from './Dashboard.module.scss'
+import { SortBy } from '../../types';
 
 const Dashboard: React.FC = () => {
   const {
@@ -18,37 +19,61 @@ const Dashboard: React.FC = () => {
     setIsError
   } = useNewsStore();
 
+  const [displayedNews, setDisplayedNews] = useState(news);
+
+  const loadNews = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      const data = await fetchNews();
+      setNews(data);
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setNews, setIsLoading, setIsError]);
+
   useEffect(() => {
-    const loadNews = async () => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        const data = await fetchNews(searchQuery, sortOption);
-        setNews(data);
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
+    loadNews();
+  }, [loadNews]);
+
+  useEffect(() => {
+    let updatedNews = [...news];
+
+    if (searchQuery) {
+      updatedNews = updatedNews.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
 
-    loadNews();
-  }, [searchQuery, sortOption]);
+    if (sortOption) {
+      updatedNews.sort((a, b) => {
+        const dateA = new Date(a.publishedAt);
+        const dateB = new Date(b.publishedAt);
+
+        if (sortOption === SortBy.Newest) {
+          return dateB.getTime() - dateA.getTime();
+        } else if (sortOption === SortBy.Oldest) {
+          return dateA.getTime() - dateB.getTime();
+        }
+
+        return 0;
+      });
+    }
+
+    setDisplayedNews(updatedNews);
+  }, [news, searchQuery, sortOption]);
 
   if (isError) {
-    return <ErrorMessage error={'Не удалось загрузить новости'} />
+    return <ErrorMessage error={'Не удалось загрузить новости'} />;
   }
 
   return (
-    <Layout
-      className={styles.dashboard}
-    >
+    <Layout className={styles.dashboard}>
       <Menu />
-
-      <Layout.Content
-        className={styles.layoutContent}
-      >
-        <NewsTable news={news}/>
+      <Layout.Content className={styles.layoutContent}>
+        <NewsTable news={displayedNews} />
       </Layout.Content>
     </Layout>
   );

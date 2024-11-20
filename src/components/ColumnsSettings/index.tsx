@@ -4,7 +4,7 @@ import { CHECKBOX_OPTIONS, TABLE_COLUMNS } from '../../constants';
 import { useNewsStore } from "../../store/useNewsStore";
 
 const ColumnsSettings: React.FC = () => {
-  const { setVisibleColumns } = useNewsStore();
+  const { setVisibleColumns, visibleColumns } = useNewsStore();
 
   const handleChange = (columns: string[]) => {
     setVisibleColumns(columns)
@@ -16,6 +16,7 @@ const ColumnsSettings: React.FC = () => {
     >
       <Checkbox.Group
         options={CHECKBOX_OPTIONS}
+        value={visibleColumns}
         defaultValue={TABLE_COLUMNS}
         onChange={handleChange}
       />
