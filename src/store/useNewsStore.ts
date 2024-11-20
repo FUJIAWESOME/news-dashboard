@@ -5,7 +5,7 @@ import { INewsItem, SortBy } from '../types';
 interface NewsState {
   news: INewsItem[];
   isLoading: boolean;
-  isError: boolean,
+  isError: boolean;
   visibleColumns: string[];
   searchQuery: string;
   sortOption: SortBy;

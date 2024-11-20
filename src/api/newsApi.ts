@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const fetchNews = async (): Promise<INewsItem[]> => {
   const params: FetchNewsParams = {
-    sources: 'bbc-news'
+    sources: 'bbc-news',
   };
 
   const response = await api.get(NEWS_API.EVERYTHING_ENDPOINT, {

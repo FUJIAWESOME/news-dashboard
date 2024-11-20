@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Card } from 'antd';
 import { useNewsStore } from '../../store/useNewsStore';
 import ErrorMessage from '../../components/ErrorMessage';
-import styles from './Arcticle.module.scss'
+import styles from './Article.module.scss'
 import { INewsItem } from '../../types';
 
 const ArticlePage: React.FC = () => {

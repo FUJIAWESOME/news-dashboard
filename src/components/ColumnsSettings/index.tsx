@@ -7,7 +7,7 @@ const ColumnsSettings: React.FC = () => {
   const { setVisibleColumns, visibleColumns } = useNewsStore();
 
   const handleChange = (columns: string[]) => {
-    setVisibleColumns(columns)
+    setVisibleColumns(columns);
   };
 
   return (

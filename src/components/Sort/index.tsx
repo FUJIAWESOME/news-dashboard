@@ -11,7 +11,7 @@ const SearchInput: React.FC = () => {
   } = useNewsStore();
 
   const handleSortChange = (value: SortBy) => {
-    setSortOption(value)
+    setSortOption(value);
   };
 
   return (

@@ -6,7 +6,7 @@ const SearchInput: React.FC = () => {
   const { setSearchQuery, searchQuery } = useNewsStore();
 
   const handleInputChange = (e: { target: { value: string; }; }) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(e.target.value);
   };
 
   return (

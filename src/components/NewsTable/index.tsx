@@ -6,6 +6,7 @@ import { ColumnsType } from 'antd/es/table';
 import Loader from '../../components/Loader';
 import styles from './NewsTable.module.scss'
 import { INewsItem } from '../../types';
+import { PATH } from '../../constants';
 
 interface NewsTableProps {
   news: INewsItem[];
@@ -16,7 +17,7 @@ const NewsTable: React.FC<NewsTableProps> = ({ news }) => {
   const navigate = useNavigate();
 
   const handleReadMore = (id: number) => {
-    navigate(`/article/${id}`);
+    navigate(`${PATH.ARTICLE}/${id}`);
   };
 
   const columns: ColumnsType<INewsItem> = [

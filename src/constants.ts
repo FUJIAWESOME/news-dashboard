@@ -21,9 +21,16 @@ const SORT_OPTIONS = [
   { label: 'Самые старые', value: SortBy.Oldest },
 ];
 
+const PATH = {
+  ROOT: '/',
+  ARTICLE: '/article',
+  ARTICLE_ID: '/article/:id',
+};
+
 export {
   TABLE_COLUMNS,
   NEWS_API,
   CHECKBOX_OPTIONS,
-  SORT_OPTIONS
+  SORT_OPTIONS,
+  PATH
 };
